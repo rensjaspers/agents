@@ -7,7 +7,7 @@ description: NestJS logging guidelines with a dedicated LogModule and LogService
 
 ---
 
-## Pattern used in this project
+## Pattern
 
 Use a dedicated `LogModule` + `LogService` based on NestJS `ConsoleLogger`.
 
@@ -21,23 +21,23 @@ Use a dedicated `LogModule` + `LogService` based on NestJS `ConsoleLogger`.
 Create a `LogService` that extends `ConsoleLogger`, overrides `getTimestamp()` to return ISO 8601, and applies log levels from `LOG_LEVEL`.
 
 ```ts
-import { ConsoleLogger, Injectable, LogLevel } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { ConsoleLogger, Injectable, LogLevel } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 
 @Injectable()
 export class LogService extends ConsoleLogger {
-  private static readonly LOG_LEVEL_MAP: Record<string, LogLevel[]> = {
-    error: ['error'],
-    warn: ['error', 'warn'],
-    info: ['error', 'warn', 'log'],
-    debug: ['error', 'warn', 'log', 'debug', 'verbose'],
+  private static readonly logLevelMap: Record<string, LogLevel[]> = {
+    error: ["error"],
+    warn: ["error", "warn"],
+    info: ["error", "warn", "log"],
+    debug: ["error", "warn", "log", "debug", "verbose"],
   };
 
   constructor(
     private readonly configService: ConfigService<
       Record<string, unknown>,
       false
-    >,
+    >
   ) {
     super(LogService.name, {
       timestamp: true,
@@ -50,10 +50,10 @@ export class LogService extends ConsoleLogger {
   }
 
   private resolveLogLevels(): LogLevel[] {
-    const rawLevel = this.configService.get<string>('LOG_LEVEL', 'info');
+    const rawLevel = this.configService.get<string>("LOG_LEVEL", "info");
     const normalizedLevel = rawLevel.toLowerCase();
     return (
-      LogService.LOG_LEVEL_MAP[normalizedLevel] ?? LogService.LOG_LEVEL_MAP.info
+      LogService.logLevelMap[normalizedLevel] ?? LogService.logLevelMap.info
     );
   }
 }
@@ -66,9 +66,9 @@ export class LogService extends ConsoleLogger {
 Provide and export `LogService` from a separate module:
 
 ```ts
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { LogService } from './log.service';
+import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
+import { LogService } from "./log.service";
 
 @Module({
   imports: [ConfigModule],
@@ -105,7 +105,7 @@ export class CatsService {
   constructor(private readonly logger: LogService) {}
 
   findAll() {
-    this.logger.log('Finding all cats');
+    this.logger.log("Finding all cats");
   }
 }
 ```
