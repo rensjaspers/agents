@@ -1,62 +1,108 @@
 ---
 name: nestjs-logging
-description: NestJS logging guidelines covering custom logger setup with ISO timestamps. Use when setting up logging in a NestJS application or when the default logger format is insufficient.
+description: NestJS logging guidelines with a dedicated LogModule and LogService that provide ISO timestamps and respect configured log levels.
 ---
 
 # NestJS Logging
 
 ---
 
-## Logger Choice
+## Pattern used in this project
 
-Use the built-in NestJS `ConsoleLogger` as the base — **do not** add Pino, Winston, or other third-party loggers unless explicitly requested.
+Use a dedicated `LogModule` + `LogService` based on NestJS `ConsoleLogger`.
+
+- Do not add Pino, Winston, or other third-party loggers unless explicitly requested.
+- Register logging through DI, not through ad-hoc logger instances.
 
 ---
 
-## Custom Logger (ISO Timestamps)
+## LogService (ISO timestamps + loglevel)
 
-The default NestJS logger prints timestamps in a non-sortable American format. Always replace it with a custom logger that renders ISO 8601 timestamps.
+Create a `LogService` that extends `ConsoleLogger`, overrides `getTimestamp()` to return ISO 8601, and applies log levels from `LOG_LEVEL`.
 
 ```ts
-import { ConsoleLogger, Injectable } from '@nestjs/common';
+import { ConsoleLogger, Injectable, LogLevel } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
-export class AppLogger extends ConsoleLogger {
-  protected formatTimestamp(): string {
+export class LogService extends ConsoleLogger {
+  private static readonly LOG_LEVEL_MAP: Record<string, LogLevel[]> = {
+    error: ['error'],
+    warn: ['error', 'warn'],
+    info: ['error', 'warn', 'log'],
+    debug: ['error', 'warn', 'log', 'debug', 'verbose'],
+  };
+
+  constructor(
+    private readonly configService: ConfigService<
+      Record<string, unknown>,
+      false
+    >,
+  ) {
+    super(LogService.name, {
+      timestamp: true,
+    });
+    this.setLogLevels(this.resolveLogLevels());
+  }
+
+  protected getTimestamp(): string {
     return new Date().toISOString();
+  }
+
+  private resolveLogLevels(): LogLevel[] {
+    const rawLevel = this.configService.get<string>('LOG_LEVEL', 'info');
+    const normalizedLevel = rawLevel.toLowerCase();
+    return (
+      LogService.LOG_LEVEL_MAP[normalizedLevel] ?? LogService.LOG_LEVEL_MAP.info
+    );
   }
 }
 ```
 
-Register it in `AppModule`:
+---
+
+## LogModule
+
+Provide and export `LogService` from a separate module:
 
 ```ts
 import { Module } from '@nestjs/common';
-import { AppLogger } from './app-logger';
+import { ConfigModule } from '@nestjs/config';
+import { LogService } from './log.service';
 
 @Module({
-  providers: [AppLogger],
+  imports: [ConfigModule],
+  providers: [LogService],
+  exports: [LogService],
 })
-export class AppModule {}
+export class LogModule {}
 ```
 
-Bootstrap with the custom logger:
+Load `LogModule` in `AppModule` imports.
+
+---
+
+## Bootstrap in `main.ts`
+
+Use Nest buffering and switch to the DI logger globally:
 
 ```ts
-const app = await NestFactory.create(AppModule, { bufferLogs: true });
-app.useLogger(app.get(AppLogger));
+const app = await NestFactory.create(AppModule, {
+  bufferLogs: true,
+});
+app.useLogger(app.get(LogService));
 ```
 
 ---
 
 ## Usage
 
-Inject `AppLogger` into services and controllers — do not use `console.log`.
+Inject `LogService` into services/controllers and do not use `console.log`.
 
 ```ts
 @Injectable()
 export class CatsService {
-  constructor(private readonly logger: AppLogger) {}
+  constructor(private readonly logger: LogService) {}
 
   findAll() {
     this.logger.log('Finding all cats');
