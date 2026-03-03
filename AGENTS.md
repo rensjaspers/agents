@@ -18,9 +18,11 @@ templates/   # Project-specific templates
 
 Located in `skills/`. Each skill has a `SKILL.md` and optional `references/` folder.
 
-Angular: `angular-component`, `angular-di`, `angular-directives`, `angular-forms`, `angular-http`, `angular-preferences`, `angular-routing`, `angular-signals`, `angular-ssr`, `angular-testing`, `angular-tooling`
+Angular (`skills/angular/`): `angular-component`, `angular-di`, `angular-directives`, `angular-forms`, `angular-http`, `angular-preferences`, `angular-routing`, `angular-signals`, `angular-ssr`, `angular-testing`, `angular-tooling`
 
-Other: `code-review`, `commit-and-pr`, `css`, `ionic`, `nestjs`, `nestjs-config`, `nestjs-logging`, `orchestrate-dev-team`, `rxjs`, `typescript`
+NestJS (`skills/nestjs/`): `nestjs`, `nestjs-config`, `nestjs-logging`
+
+Other: `code-review`, `commit-and-pr`, `css`, `ionic`, `orchestrate-dev-team`, `rxjs`, `typescript`
 
 ## Agents
 

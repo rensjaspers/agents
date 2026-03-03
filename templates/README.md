@@ -1,15 +1,15 @@
 # Templates
 
-This folder holds `.agent` folder templates for specific project types — for example an Angular project, a NestJS project, or a creative writing project.
+This folder holds `.agent` folder templates for specific project types.
 
 Each template is a curated set of agents, rules, and skills cherry-picked from the base library using symlinks.
 
-## Usage
-
-Copy the template folder into your project as `.agents` (or whichever dot folder your AI tooling expects), then adjust the symlinks to fit your needs.
-
-## Planned templates
+## Available templates
 
 - `angular/` — Angular frontend projects
+- `ionic-angular/` — Ionic + Angular projects
 - `nestjs/` — NestJS backend projects
-- `creative-writing/` — Creative writing projects
+
+## Usage
+
+Each template has its own `README.md` with a one-line install command. Run it from your project root to copy the template into your `.agents` folder without overwriting any files you have already customised.
