@@ -1,0 +1,11 @@
+---
+description: Use mv when moving files or folders — never recreate them manually
+globs:
+alwaysApply: true
+---
+
+When asked to move files or folders, always use `mv`.
+
+Do not copy-paste content into new files and delete the originals. This wastes tokens and risks data loss.
+
+After moving, manually update any imports or paths that reference the old location.

@@ -1,0 +1,37 @@
+---
+description: Code style guidelines for all programming tasks
+globs:
+alwaysApply: true
+---
+
+## Function and class size
+
+- Functions ≤ 10 lines; classes ≤ 300 lines — refactor if larger
+
+## Control flow
+
+- Always use curly braces with `if` statements
+- Avoid complex ternaries — except in templates
+- Use early returns to reduce nesting
+
+## DRY (pragmatic)
+
+Check if logic already exists before writing new code. Reuse existing functions or patterns when it makes sense. Don't force abstractions just to be DRY.
+
+## Comments — almost never
+
+Do not write comments. Code should be self-explanatory.
+
+Valid exceptions:
+- Workarounds for buggy third-party APIs
+- Warnings about non-obvious side effects or constraints
+- Legal/compliance requirements
+- `TODO`/`FIXME` with an issue reference
+
+If code needs a comment to be understood, rewrite the code instead.
+
+## Before finishing
+
+- No type errors
+- No lint errors
+- All tests pass

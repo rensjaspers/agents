@@ -1,20 +1,27 @@
-# Agent Code Guidelines
+# Agent Guidelines
 
-This repository uses the `.agents` directory structure for organizing skills and guidelines.
-
-## Structure
+This repository uses the following structure:
 
 ```
-.agents/
-  skills/          # Technical skills for specific frameworks and tools
-  guidelines/      # General coding guidelines and personal preferences
+rules/       # Coding rules (.mdc format)
+skills/      # Framework and tool skills
+agents/      # Agent definitions
+templates/   # Project-specific templates
 ```
 
-## General Guidelines
+## Rules
 
-Located in `.agents/guidelines/` (for reference and documentation):
+- [code-style](./rules/code-style.mdc) — Function size, control flow, DRY, comments
+- [file-moves](./rules/file-moves.mdc) — Always use `mv` to move files
 
-- [Code Style](./.agents/guidelines/code-style.md) — Function size, control flow, DRY, comments
-- File moves: when asked to move files/folders, always use `mv`; do not recreate files. Manually update imports/paths where needed.
+## Skills
 
-**Note:** The Angular-specific guidelines are consolidated into the `angular-preferences` skill for easier loading.
+Located in `skills/`. Each skill has a `SKILL.md` and optional `references/` folder.
+
+Angular: `angular-component`, `angular-di`, `angular-directives`, `angular-forms`, `angular-http`, `angular-preferences`, `angular-routing`, `angular-signals`, `angular-ssr`, `angular-testing`, `angular-tooling`
+
+Other: `code-review`, `commit-and-pr`, `css`, `ionic`, `nestjs`, `nestjs-config`, `nestjs-logging`, `orchestrate-dev-team`, `rxjs`, `typescript`
+
+## Agents
+
+Located in `agents/`. Specialist roles: `committer`, `implementer`, `linter`, `planner`, `release-notes-writer`, `researcher`, `reviewer`, `unit-tester`
