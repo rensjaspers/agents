@@ -10,8 +10,7 @@ alwaysApply: true
 
 ## Control flow
 
-- Always use curly braces with `if` statements
-- Avoid complex ternaries — except in templates
+- Avoid complex ternaries
 - Use early returns to reduce nesting
 
 ## DRY (pragmatic)
@@ -23,6 +22,7 @@ Check if logic already exists before writing new code. Reuse existing functions 
 Do not write comments. Code should be self-explanatory.
 
 Valid exceptions:
+
 - Workarounds for buggy third-party APIs
 - Warnings about non-obvious side effects or constraints
 - Legal/compliance requirements
