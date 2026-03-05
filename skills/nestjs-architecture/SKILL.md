@@ -1,15 +1,9 @@
 ---
-name: nestjs
-description: NestJS development guidelines covering CLI generation, architecture patterns, and module design. Use when writing or modifying NestJS backend code, modules, or services.
+name: nestjs-architecture
+description: NestJS architecture guidelines covering idiomatic patterns, module design, and dependency management. Use when designing or reviewing NestJS module structure, services, or application architecture.
 ---
 
-# NestJS
-
----
-
-## Code Generation
-
-Use the NestJS CLI to generate modules, services, controllers, and resources.
+# NestJS Architecture
 
 ---
 
