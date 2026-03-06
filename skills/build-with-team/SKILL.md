@@ -1,11 +1,13 @@
 ---
 name: build-with-team
-description: Build a feature or fix a bug using a team of specialist subagents. Use when a task needs research, planning, implementation, testing, linting, review, and release notes with explicit handoffs.
+description: Build a feature or fix a bug using a team of specialist subagents. Fully autonomous — no human-in-the-loop from start to finish. Use for tasks of medium complexity that need research, planning, implementation, testing, linting, review, and release notes with explicit handoffs.
 ---
 
 # Build With Team
 
-Use this skill when a request is large, risky, or multi-step.
+Use this skill for tasks of medium complexity: tasks that require multiple specialist steps but have a well-defined goal and limited unknowns. Examples: adding a feature to an existing module, fixing a reproducible bug, or refactoring a bounded part of the codebase. For exploratory or high-risk tasks where human judgment is needed mid-way, use a different approach.
+
+This pipeline runs fully autonomously from start to finish — there is no human-in-the-loop at any stage.
 
 ## Goal
 
@@ -59,9 +61,9 @@ scout -> planner -> implementer -> unit-tester -> linter -> reviewer -> release-
 
 9. Start `committer`
    - Run only after release notes are ready.
-   - Use the `commit-and-pr` skill.
-   - First ask user choice: no commit, commit only, or commit + PR.
-   - Execute only the selected path and return commit hash / PR URL when relevant.
+   - Use the `pr-without-approval` skill.
+   - Commit and open a PR immediately without asking the user for confirmation.
+   - Return commit hash and PR URL.
 
 ## Handoff Contract
 
