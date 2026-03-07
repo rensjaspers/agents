@@ -1,6 +1,6 @@
 ---
 name: build-with-team
-description: Build a feature or fix a bug using a team of specialist subagents. Fully autonomous — no human-in-the-loop from start to finish. Use for tasks of medium complexity that need research, planning, implementation, testing, linting, review, and release notes with explicit handoffs. Requires a complete, verified starting point — the intake validates the request before any planning begins.
+description: Build a feature or fix a bug using a team of specialist subagents. Fully autonomous — no human-in-the-loop from start to finish. Use for tasks of medium complexity that need research, planning, implementation, testing, linting, review, and release notes with explicit handoffs. Requires a complete, verified starting point — the intaker validates the request before any planning begins.
 ---
 
 # Build With Team
@@ -12,11 +12,11 @@ This pipeline runs fully autonomously from start to finish — there is no human
 ## Goal
 
 Complete complex work with a coordinated subagent pipeline:
-intake -> planner -> implementer -> unit-tester -> linter -> reviewer -> release-notes-writer -> committer.
+intaker -> planner -> implementer -> unit-tester -> linter -> reviewer -> release-notes-writer -> committer.
 
 ## Step-by-Step Process
 
-1. Start `intake`
+1. Start `intaker`
    - Critically evaluate the request: is it complete, correct, and unambiguous?
    - Query context-hub MCP tools immediately when available to retrieve stored context and prior decisions.
    - Ask the user targeted follow-up questions for every gap, ambiguity, or suspicious claim — unless the request already meets all quality criteria.
@@ -26,7 +26,7 @@ intake -> planner -> implementer -> unit-tester -> linter -> reviewer -> release
    - Output a validated, well-framed task description with all surrounding context.
 
 2. Start `planner`
-   - Receive the task description from the intake.
+   - Receive the task description from the intaker.
    - Analyse the codebase to understand what needs to change and how.
    - Build a detailed execution plan grounded in actual code analysis.
    - Make steps concrete so lower-effort models can execute reliably.
