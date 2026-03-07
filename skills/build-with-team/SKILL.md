@@ -1,6 +1,6 @@
 ---
 name: build-with-team
-description: Build a feature or fix a bug using a team of specialist subagents. Fully autonomous — no human-in-the-loop from start to finish. Use for tasks of medium complexity that need research, planning, implementation, testing, linting, review, and release notes with explicit handoffs.
+description: Build a feature or fix a bug using a team of specialist subagents. Fully autonomous — no human-in-the-loop from start to finish. Use for tasks of medium complexity that need research, planning, implementation, testing, linting, review, and release notes with explicit handoffs. Requires a complete, verified starting point — the scout validates the request before any planning begins.
 ---
 
 # Build With Team
@@ -17,11 +17,13 @@ scout -> planner -> implementer -> unit-tester -> linter -> reviewer -> release-
 ## Step-by-Step Process
 
 1. Start `scout`
-   - Gather all available context from external sources: tickets, bug reports, user input, documentation.
-   - Use context-hub MCP tools when available.
-   - Ask user follow-up questions for missing context.
+   - Critically evaluate the request: is it complete, correct, and unambiguous?
+   - Query context-hub MCP tools immediately when available to retrieve stored context and prior decisions.
+   - Ask the user targeted follow-up questions for every gap, ambiguity, or suspicious claim — unless the request already meets all quality criteria.
+   - Validate user claims; do not assume the request is accurate as stated. Users can be mistaken about symptoms, causes, or scope.
+   - Do **not** proceed until enough verified information is available to frame the task accurately.
    - Do **not** diagnose root causes or propose technical solutions.
-   - Output a clear, well-framed task description with all surrounding context.
+   - Output a validated, well-framed task description with all surrounding context.
 
 2. Start `planner`
    - Receive the task description from the scout.

@@ -5,7 +5,7 @@ description: Analyse the codebase and produce a detailed, step-by-step execution
 
 # Planning
 
-Use this skill to turn a well-framed task description (from the scout) into a concrete execution plan that lower-effort models can follow reliably.
+Use this skill to turn a validated, well-framed task description (from the scout) into a concrete execution plan that lower-effort models can follow reliably.
 
 You are the **code expert** in this pipeline. The scout has clarified the question; your job is to understand the codebase deeply enough to determine _how_ to answer it, and then produce an unambiguous plan.
 
@@ -39,7 +39,7 @@ Produce a detailed plan with clear steps, dependencies, and verification checks,
 
 ## Inputs
 
-- Prefer scout output (well-framed task description with context) when available.
+- Prefer scout output (validated, well-framed task description with context) when available.
 - If scout output is missing, use the user input directly.
 
 ## Output Format
