@@ -5,4 +5,4 @@ description: Refactors code according to project code-style rules. Use when refa
 
 # Refactor
 
-Refactor code according to [rules/code-style.mdc](../../../rules/code-style.mdc).
+Refactor code according to [rules/code-style.mdc](../../rules/code-style.mdc).
